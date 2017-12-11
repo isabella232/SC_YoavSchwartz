@@ -1,4 +1,4 @@
-///// Copyright (c) 2017 Razeware LLC
+/// Copyright (c) 2017 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -28,26 +28,24 @@
 
 import UIKit
 
-class InformationCardViewController: UIViewController {
+final class InformationCardViewController: UIViewController {
 
-  @IBOutlet var headerContainerView: UIView!
-  @IBOutlet var detailsContainerView: UIView!
-
+  // MARK: - Properties
   var headerViewController: UIViewController?
   var detailsViewController: UIViewController?
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view.
-  }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-
   /// Saves a reference to the curretly displayed airport
   var displayedAirport: Airport?
+
+  /// Helper method to retrieve the main storyboard for the application
+  private lazy var mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
+  // MARK: - IBOutlets
+  @IBOutlet var headerContainerView: UIView!
+  @IBOutlet var detailsContainerView: UIView!
+}
+
+// MARK: - Internal
+extension InformationCardViewController {
 
   /// Updates the card view with a new Airport to display
   ///
@@ -57,58 +55,70 @@ class InformationCardViewController: UIViewController {
     switchHeaderView(for: airport)
     fetchAndDisplayData(for: airport)
   }
+}
+
+// MARK: - Private
+private extension InformationCardViewController {
 
   /// Switches the header view to match an airport. This is done be replacing the UIViewController in the headerContainerView
   ///
   /// - Parameter airport: The Airport to display
-  private func switchHeaderView(for airport: Airport) {
+  func switchHeaderView(for airport: Airport) {
     removeHeaderControllerIfNeeded()
-    let headerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AirportCardHeaderViewController") as! AirportCardHeaderViewController
-    headerVC.airportName = airport.code
-    headerViewController = headerVC
-    embedChildController(headerVC, in: headerContainerView)
+    let headerViewController = mainStoryboard.instantiateViewController(withIdentifier: "AirportCardHeaderViewController") as! AirportCardHeaderViewController
+    headerViewController.airportName = airport.code
+    self.headerViewController = headerViewController
+    embedChildController(headerViewController, in: headerContainerView)
   }
 
   /// Switches the information view to match an airport. This is done be replacing the UIViewController in the infoContainerView.
   /// We first put in the loading view, and then when the data is ready, switch to a child view controller that can display it.
   /// - Parameter airport: The Airport to display
-  private func fetchAndDisplayData(for airport: Airport) {
+  func fetchAndDisplayData(for airport: Airport) {
     removeDetailsControllerIfNeeded()
     displayLoadingController()
     airport.getExtraInfo { [weak self] extraInfo in
-      guard let strongSelf = self else { return }
-      guard let displayedAirport = strongSelf.displayedAirport, displayedAirport == airport else { return }
+      guard let strongSelf = self,
+        let displayedAirport = strongSelf.displayedAirport,
+        displayedAirport == airport else {
+          return
+      }
+
       strongSelf.removeDetailsControllerIfNeeded()
       strongSelf.displayAirportInformationController(extraAirportInformation: extraInfo)
     }
   }
 
   /// Shows the loading view controller in the informationContainerView
-  private func displayLoadingController() {
-    let loadingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoadingDetailsViewController")
-    detailsViewController = loadingVC
-    embedChildController(loadingVC, in: detailsContainerView)
+  func displayLoadingController() {
+    let loadingViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoadingDetailsViewController")
+    self.detailsViewController = loadingViewController
+    embedChildController(loadingViewController, in: detailsContainerView)
   }
 
   /// Shows the extra airport information view controller in the informationContainerView
-  private func displayAirportInformationController(extraAirportInformation: ExtraAirportInfo) {
-    let detailsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ExtraAirportInformationViewController") as! ExtraAirportInformationViewController
-    detailsViewController = detailsVC
-    detailsVC.airportInfo = extraAirportInformation
-    embedChildController(detailsVC, in: detailsContainerView)
+  func displayAirportInformationController(extraAirportInformation: ExtraAirportInfo) {
+    let detailsViewController = mainStoryboard.instantiateViewController(withIdentifier: "ExtraAirportInformationViewController") as! ExtraAirportInformationViewController
+    self.detailsViewController = detailsViewController
+    detailsViewController.airportInfo = extraAirportInformation
+    embedChildController(detailsViewController, in: detailsContainerView)
   }
 
   /// Helper method to remove the current view controller in the header
-  private func removeHeaderControllerIfNeeded() {
-    if let headerViewController = headerViewController {
-      removeChildController(headerViewController)
+  func removeHeaderControllerIfNeeded() {
+    guard let headerViewController = headerViewController else {
+      return
     }
+
+    removeChildController(headerViewController)
   }
 
   /// Helper method to remove the current view controller in the deatils
-  private func removeDetailsControllerIfNeeded() {
-    if let detailsViewController = detailsViewController {
-      removeChildController(detailsViewController)
+  func removeDetailsControllerIfNeeded() {
+    guard let detailsViewController = detailsViewController else {
+      return
     }
+
+    removeChildController(detailsViewController)
   }
 }

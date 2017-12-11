@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		952008441FDEECC0003D8FDC /* MainMapViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952008431FDEECC0003D8FDC /* MainMapViewControllerDelegate.swift */; };
 		D2A5F2091F4A9144005CD714 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2A5F2071F4A9144005CD714 /* Main.storyboard */; };
 		D2A5F20B1F4A9144005CD714 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2A5F20A1F4A9144005CD714 /* Assets.xcassets */; };
 		D2A5F2211F4A96D0005CD714 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A5F2201F4A96D0005CD714 /* AppDelegate.swift */; };
@@ -18,11 +19,12 @@
 		E555E9951FCE263C004A4237 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E555E9941FCE263C004A4237 /* Airport.swift */; };
 		E555E9971FCE28A3004A4237 /* AirportAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E555E9961FCE28A3004A4237 /* AirportAnnotation.swift */; };
 		E555E99B1FCE329A004A4237 /* AirportCardHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E555E99A1FCE329A004A4237 /* AirportCardHeaderViewController.swift */; };
-		E5C85AB51FD2B98C00F02A8A /* UIViewController + ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C85AB41FD2B98C00F02A8A /* UIViewController + ChildViewController.swift */; };
+		E5C85AB51FD2B98C00F02A8A /* UIViewController+ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C85AB41FD2B98C00F02A8A /* UIViewController+ChildViewController.swift */; };
 		E5C85AB71FD2BF5700F02A8A /* ExtraAirportInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C85AB61FD2BF5700F02A8A /* ExtraAirportInformationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		952008431FDEECC0003D8FDC /* MainMapViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewControllerDelegate.swift; sourceTree = "<group>"; };
 		D2A5F2001F4A9144005CD714 /* MMVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A5F2081F4A9144005CD714 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2A5F20A1F4A9144005CD714 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -36,7 +38,7 @@
 		E555E9941FCE263C004A4237 /* Airport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airport.swift; sourceTree = "<group>"; };
 		E555E9961FCE28A3004A4237 /* AirportAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportAnnotation.swift; sourceTree = "<group>"; };
 		E555E99A1FCE329A004A4237 /* AirportCardHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportCardHeaderViewController.swift; sourceTree = "<group>"; };
-		E5C85AB41FD2B98C00F02A8A /* UIViewController + ChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + ChildViewController.swift"; sourceTree = "<group>"; };
+		E5C85AB41FD2B98C00F02A8A /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
 		E5C85AB61FD2BF5700F02A8A /* ExtraAirportInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraAirportInformationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,7 +119,7 @@
 		E5C85AB31FD2B96800F02A8A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				E5C85AB41FD2B98C00F02A8A /* UIViewController + ChildViewController.swift */,
+				E5C85AB41FD2B98C00F02A8A /* UIViewController+ChildViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				E555E98D1FCE1C52004A4237 /* MainMapViewController.swift */,
+				952008431FDEECC0003D8FDC /* MainMapViewControllerDelegate.swift */,
 			);
 			path = "Map View";
 			sourceTree = "<group>";
@@ -205,7 +208,8 @@
 			files = (
 				E555E9951FCE263C004A4237 /* Airport.swift in Sources */,
 				E555E99B1FCE329A004A4237 /* AirportCardHeaderViewController.swift in Sources */,
-				E5C85AB51FD2B98C00F02A8A /* UIViewController + ChildViewController.swift in Sources */,
+				E5C85AB51FD2B98C00F02A8A /* UIViewController+ChildViewController.swift in Sources */,
+				952008441FDEECC0003D8FDC /* MainMapViewControllerDelegate.swift in Sources */,
 				E5C85AB71FD2BF5700F02A8A /* ExtraAirportInformationViewController.swift in Sources */,
 				E555E98E1FCE1C52004A4237 /* MainMapViewController.swift in Sources */,
 				E555E9901FCE1C67004A4237 /* InformationCardViewController.swift in Sources */,

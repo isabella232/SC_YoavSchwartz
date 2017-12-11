@@ -1,4 +1,4 @@
-///// Copyright (c) 2017 Razeware LLC
+/// Copyright (c) 2017 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,11 @@
 import Foundation
 import CoreLocation
 
+typealias ExtraAirportInfo = (name: String, city: String, country: String)
+
 struct Airport: Codable {
+
+  // MARK: - Properties
   let code: String
 
   /// JSON is not strictly correct, as the lat should be a num
@@ -40,6 +44,7 @@ struct Airport: Codable {
   var latitude: CLLocationDegrees {
     return Double(lat)!
   }
+
   var longitude: CLLocationDegrees {
     return Double(lon)!
   }
@@ -49,21 +54,24 @@ struct Airport: Codable {
   fileprivate let country: String
 }
 
-typealias ExtraAirportInfo = (name: String, city: String, country: String)
+// MARK: - Equatable
+extension Airport: Equatable {
 
-func == (lhs: Airport, rhs: Airport) -> Bool {
-  guard lhs.code == rhs.code else { return false }
-  guard lhs.latitude == rhs.latitude else { return false }
-  guard lhs.longitude == rhs.longitude else { return false }
-  guard lhs.name == rhs.name else { return false }
-  guard lhs.city == rhs.city else { return false }
-  guard lhs.country == rhs.country else { return false }
-  return true
+  static func == (lhs: Airport, rhs: Airport) -> Bool {
+    guard lhs.code == rhs.code else { return false }
+    guard lhs.latitude == rhs.latitude else { return false }
+    guard lhs.longitude == rhs.longitude else { return false }
+    guard lhs.name == rhs.name else { return false }
+    guard lhs.city == rhs.city else { return false }
+    guard lhs.country == rhs.country else { return false }
+
+    return true
+  }
 }
 
-extension Airport: Equatable {}
-
+// MARK: - Internal
 extension Airport {
+
   /// This is meant to imitate a network fetch
   ///
   /// - Parameter completion: Called after a delay with the extra information on the airport

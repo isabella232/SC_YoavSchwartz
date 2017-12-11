@@ -1,4 +1,4 @@
-///// Copyright (c) 2017 Razeware LLC
+/// Copyright (c) 2017 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -28,68 +28,29 @@
 
 import UIKit
 
-class BackingViewController: UIViewController {
+final class BackingViewController: UIViewController {
 
+  enum CardPosition {
+    case up
+    case down
+  }
+
+  // MARK: - Properties
   var mainMapViewController: MainMapViewController!
-  @IBOutlet var mapContainerView: UIView!
-
   var informationCardViewController: InformationCardViewController!
-  @IBOutlet var cardContainerView: UIView!
 
+  // MARK: - IBOutlets
+  @IBOutlet var mapContainerView: UIView!
+  @IBOutlet var cardContainerView: UIView!
   @IBOutlet var cardDownConstraint: NSLayoutConstraint!
   @IBOutlet var cardUpConstraint: NSLayoutConstraint!
 
+  // MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+
     applyCardCornerRadiusEffect()
     setCardPosition(.down, animated: false)
-  }
-
-  /// Sets the position of the card on the backing view
-  ///
-  /// - Parameters:
-  ///   - position: The position to move the card to
-  ///   - animated: Whether the change should be animated
-  private func setCardPosition(_ position: CardPosition, animated: Bool) {
-    switch position {
-    case .up:
-      cardDownConstraint.isActive = false
-      cardUpConstraint.isActive = true
-    case .down:
-      cardUpConstraint.isActive = false
-      cardDownConstraint.isActive = true
-    }
-
-    if animated {
-      UIView.animate(withDuration: 0.1, animations: {
-        self.view.layoutIfNeeded()
-      })
-    } else {
-      self.view.layoutIfNeeded()
-    }
-  }
-
-  /// Gives the card a iOS Maps feel by rounding corners
-  private func applyCardCornerRadiusEffect() {
-    cardContainerView.layer.cornerRadius = 20
-    cardContainerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-  }
-
-  /// Loads a list of airports from a JSON file
-  ///
-  /// - Returns: An array or Airport structs
-  func getAirports() -> [Airport] {
-    guard let path = Bundle.main.path(forResource: "airports", ofType: "json") else { fatalError("Add json file") }
-    do {
-      let url = URL(fileURLWithPath: path)
-      let data = try Data(contentsOf: url)
-      let decoder = JSONDecoder()
-      let airports = try decoder.decode([Airport].self, from: data)
-      return airports
-    } catch {
-      print(error)
-      fatalError("json should always parse from file")
-    }
   }
 
   // MARK: - Navigation
@@ -106,14 +67,71 @@ class BackingViewController: UIViewController {
     default: break
     }
   }
+}
 
-  enum CardPosition {
-    case up
-    case down
+// MARK: - Internal
+extension BackingViewController {
+
+  /// Loads a list of airports from a JSON file
+  ///
+  /// - Returns: An array of Airport structs
+  func getAirports() -> [Airport] {
+    guard let path = Bundle.main.path(forResource: "airports", ofType: "json") else {
+      fatalError("Add json file")
+    }
+
+    do {
+      let url = URL(fileURLWithPath: path)
+      let data = try Data(contentsOf: url)
+      let decoder = JSONDecoder()
+      let airports = try decoder.decode([Airport].self, from: data)
+      return airports
+    } catch {
+      print(error)
+      fatalError("json should always parse from file")
+    }
   }
 }
 
+// MARK: - Private
+private extension BackingViewController {
+
+  /// Sets the position of the card on the backing view
+  ///
+  /// - Parameters:
+  ///   - position: The position to move the card to
+  ///   - animated: Whether the change should be animated
+  func setCardPosition(_ position: CardPosition, animated: Bool) {
+    switch position {
+    case .up:
+      cardDownConstraint.isActive = false
+      cardUpConstraint.isActive = true
+      cardContainerView.isHidden = false
+    case .down:
+      cardUpConstraint.isActive = false
+      cardDownConstraint.isActive = true
+      cardContainerView.isHidden = true
+    }
+
+    if animated {
+      UIView.animate(withDuration: 0.1) {
+        self.view.layoutIfNeeded()
+      }
+    } else {
+      self.view.layoutIfNeeded()
+    }
+  }
+
+  /// Gives the card a iOS Maps feel by rounding corners
+  func applyCardCornerRadiusEffect() {
+    cardContainerView.layer.cornerRadius = 20
+    cardContainerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+  }
+}
+
+// MARK: - MainMapViewControllerDelegate
 extension BackingViewController: MainMapViewControllerDelegate {
+
   func mapView(_ mapView: MainMapViewController, didSelectAirport airport: Airport) {
     informationCardViewController.displayDetails(for: airport)
     setCardPosition(.up, animated: true)

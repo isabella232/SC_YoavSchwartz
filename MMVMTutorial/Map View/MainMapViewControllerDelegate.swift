@@ -27,17 +27,8 @@
 /// THE SOFTWARE.
 
 import Foundation
-import MapKit
 
-@objc class AirportAnnotation: NSObject, MKAnnotation {
-
-  // MARK: - Properties
-  let airport: Airport
-  var coordinate: CLLocationCoordinate2D
-
-  // MARK: - Initializers
-  init(airport: Airport) {
-    self.airport = airport
-    coordinate = CLLocationCoordinate2D(latitude: airport.latitude, longitude: airport.longitude)
-  }
+protocol MainMapViewControllerDelegate: class {
+  func mapView(_ mapView: MainMapViewController, didSelectAirport airport: Airport)
+  func mapView(_ mapView: MainMapViewController, didDeselectAirport airport: Airport)
 }

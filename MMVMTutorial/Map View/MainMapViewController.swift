@@ -29,34 +29,41 @@
 import UIKit
 import MapKit
 
-class MainMapViewController: UIViewController {
+final class MainMapViewController: UIViewController {
 
-  @IBOutlet var mapView: MKMapView!
+  // MARK: - Properties
   weak var delegate: MainMapViewControllerDelegate?
   var airports: [Airport]!
 
+  // MARK: - IBOutlets
+  @IBOutlet var mapView: MKMapView!
+
+  // MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+
     mapView.delegate = self
     let annotations = airports.map(AirportAnnotation.init(airport:))
     mapView.addAnnotations(annotations)
-    // Do any additional setup after loading the view.
   }
 }
 
+// MARK: - MKMapViewDelegate
 extension MainMapViewController: MKMapViewDelegate {
+
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-    guard let annotation = view.annotation as? AirportAnnotation else { return }
+    guard let annotation = view.annotation as? AirportAnnotation else {
+      return
+    }
+
     delegate?.mapView(self, didSelectAirport: annotation.airport)
   }
 
   func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-    guard let annotation = view.annotation as? AirportAnnotation else { return }
+    guard let annotation = view.annotation as? AirportAnnotation else {
+      return
+    }
+
     delegate?.mapView(self, didDeselectAirport: annotation.airport)
   }
-}
-
-protocol MainMapViewControllerDelegate: class {
-  func mapView(_ mapView: MainMapViewController, didSelectAirport airport: Airport)
-  func mapView(_ mapView: MainMapViewController, didDeselectAirport airport: Airport)
 }

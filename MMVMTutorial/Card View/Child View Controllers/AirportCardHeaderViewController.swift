@@ -1,4 +1,4 @@
-///// Copyright (c) 2017 Razeware LLC
+/// Copyright (c) 2017 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -28,13 +28,18 @@
 
 import UIKit
 
-class AirportCardHeaderViewController: UIViewController {
+final class AirportCardHeaderViewController: UIViewController {
 
+  // MARK: - Properties
   var airportName: String!
+
+  // MARK: - IBOutlets
   @IBOutlet var locationNameLabel: UILabel!
 
+  // MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+
     locationNameLabel.text = airportName
   }
 }

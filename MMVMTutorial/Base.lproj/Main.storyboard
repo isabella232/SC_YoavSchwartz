@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fvc-wG-pYz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fvc-wG-pYz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0h-PK-f93">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <connections>
                                     <segue destination="gTL-sb-vqX" kind="embed" identifier="EmbedMainMapViewControllerSegue" id="17D-zv-c1t"/>
                                 </connections>
@@ -36,12 +36,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="kuE-1t-ZG0" firstAttribute="trailing" secondItem="Awr-Kf-mUO" secondAttribute="trailing" id="56z-Tp-UUJ"/>
-                            <constraint firstItem="f0h-PK-f93" firstAttribute="top" secondItem="Vrh-zB-fg7" secondAttribute="top" id="IIm-A6-n5M"/>
                             <constraint firstItem="f0h-PK-f93" firstAttribute="leading" secondItem="Awr-Kf-mUO" secondAttribute="leading" id="THA-c9-TPQ"/>
                             <constraint firstItem="f0h-PK-f93" firstAttribute="trailing" secondItem="Awr-Kf-mUO" secondAttribute="trailing" id="TJn-os-QFj"/>
                             <constraint firstItem="Awr-Kf-mUO" firstAttribute="bottom" secondItem="kuE-1t-ZG0" secondAttribute="bottom" id="Vq2-aN-Gcj"/>
                             <constraint firstItem="kuE-1t-ZG0" firstAttribute="leading" secondItem="Awr-Kf-mUO" secondAttribute="leading" id="cr4-ol-sev"/>
                             <constraint firstItem="f0h-PK-f93" firstAttribute="bottom" secondItem="Awr-Kf-mUO" secondAttribute="bottom" id="dAZ-4c-K3y"/>
+                            <constraint firstItem="f0h-PK-f93" firstAttribute="top" secondItem="Awr-Kf-mUO" secondAttribute="top" id="eny-QI-waj"/>
                             <constraint firstItem="kuE-1t-ZG0" firstAttribute="top" secondItem="Awr-Kf-mUO" secondAttribute="bottom" id="l1I-Uk-zX7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Awr-Kf-mUO"/>
@@ -67,15 +67,20 @@
             <objects>
                 <viewController id="gTL-sb-vqX" customClass="MainMapViewController" customModule="MMVM" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F3e-lR-Icz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IVF-bU-TZ5">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IVF-bU-TZ5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="IVF-bU-TZ5" secondAttribute="bottom" id="9Qt-pz-FPL"/>
+                            <constraint firstItem="IVF-bU-TZ5" firstAttribute="trailing" secondItem="viT-c7-ohL" secondAttribute="trailing" id="HN7-d7-rpf"/>
+                            <constraint firstItem="IVF-bU-TZ5" firstAttribute="top" secondItem="F3e-lR-Icz" secondAttribute="top" id="NKF-W4-GZX"/>
+                            <constraint firstItem="IVF-bU-TZ5" firstAttribute="leading" secondItem="viT-c7-ohL" secondAttribute="leading" id="z4g-UN-rmX"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="viT-c7-ohL"/>
                     </view>
                     <connections>
@@ -170,7 +175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfx-ZK-jpI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1405" y="178"/>
+            <point key="canvasLocation" x="1791" y="578"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="epL-zb-rlf">
@@ -206,7 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PSg-im-hij" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1405" y="321"/>
+            <point key="canvasLocation" x="1062" y="623"/>
         </scene>
         <!--Extra Airport Information View Controller-->
         <scene sceneID="euX-Wv-8w4">
@@ -289,7 +294,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9DH-iO-yUb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1780" y="321"/>
+            <point key="canvasLocation" x="346" y="624"/>
         </scene>
     </scenes>
     <resources>

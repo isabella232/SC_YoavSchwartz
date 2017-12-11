@@ -28,16 +28,20 @@
 
 import UIKit
 
-class ExtraAirportInformationViewController: UIViewController {
+final class ExtraAirportInformationViewController: UIViewController {
 
+  // MARK: - Properties
+  var airportInfo: ExtraAirportInfo!
+
+  // MARK: - IBOutlets
   @IBOutlet var airportNameLabel: UILabel!
   @IBOutlet var cityNameLabel: UILabel!
   @IBOutlet var countryNameLabel: UILabel!
 
-  var airportInfo: ExtraAirportInfo!
-
+  // MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+
     let (name, city, country) = airportInfo
     airportNameLabel.text = name
     cityNameLabel.text = city
