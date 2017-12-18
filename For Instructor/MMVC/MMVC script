@@ -1,0 +1,154 @@
+# Screencast Metadata
+
+## Screencast Title
+
+MMVC - Multiple Model View Controllers
+
+## Screencast Description
+
+How to use child view controllers to break down view controllers and keep view controllers simple and DRY
+
+## Language, Editor and Platform versions used in this screencast:
+
+* **Language:** Swift 4
+* **Platform:** iOS 11
+* **Editor**: XCode 9.2
+
+# MMVC
+
+Hi, what’s up everyone? This is Yoav here , and in this screencast I will show you how to use MMVC to get rid of those massive view controllers, and replace them with neat, easy to test and understand, view controllers with a single responsibility.
+
+First though, what is MMVC? MMVC or Multiple Model View Controller. This is a term I use to describe the pattern in iOS of dividing a single screen to multiple smaller view controllers, and in that way, try to divide the work and responsibility of the view controller and avoid Massive View Controllers. This is done through the use of Child View Controllers, or Container Views in Interface Builder. So a misconceptions that we need to break, is that “One view controller = One screen”.
+
+Whether consciously or not, we use child view controllers every day, when we use a UINavigationController and UITabBarController. One of the apps from apple that we can confirm takes the MMVM approach is the Maps app. So, as a tribute to the Maps app, and to show how MMVM can make it a lot simpler to write complex screens with a lot of information on them, we make a demo app to display airports on a map
+
+### Demo 1
+
+We’re gonna start by laying out the view controllers we need in Interface Builder. Now, in this screencast I will show you how to use child view controllers, both using Interface Builder using container views and in code, so don’t worry if you are not fan of Interface Builder.
+
+The key for using child view controller in interface builder is a component called Container View. I have prepared a view controller with 2 Container Views however they are not yet connected.
+
+To connect them we need to add an “Embed Segue”. I “control drag” from the first container view to the Main Map View Controller, and choose the Embed Segue option, I do the same again for the Card Container View.
+
+Finally, in the BackingViewController “prepare for segue” method, I switch on the segues destination, and prepare my view controllers to be loaded.
+
+```
+switch segue.destination {
+    case let destination as MainMapViewController:
+      destination.airports = getAirports()
+      destination.delegate = self
+      mainMapViewController = destination
+    case let destination as InformationCardViewController:
+      informationCardViewController = destination
+    default: break
+    }
+```
+
+We can now run the project, and we see all the airports are loaded, and tapping one will make the card animate up.
+
+### Interlude 1
+
+This method of using child view controllers is quite simply and straight forward. We create all the view controllers in advance in interface builder, connect them with container views and embed segues and setup up whatever we need in the parent view controller’s “prepare for segue” method.
+
+Sometimes however, we need more fine grained controlled for which child controller to show, and when. Maybe even dynamically switching between them. In those cases it’s better to create and add the view controllers in code.
+
+So now we have a running project, but our cards are a little empty, so let’s present a little information about the airport. 
+
+
+
+### Demo 2
+To add or remove a child view controller programmatically, there are specific methods that must be called in a specific order. Therefore, We’ll start by creating some helper methods extending UIViewController to make it easier to add and remove child controllers dynamically and prevent possible errors.
+
+We create a method to embed view controllers in a view
+
+```
+func embedChildController(_ childController: UIViewController, in containerView: UIView) {
+}
+```
+
+We start by calling add child view controller
+```
+self.addChildViewController(childController)
+```
+
+Then make sure that the child controller’s view doesn’t translate autoresizing masks into constraints and add it as a subview of a container view
+
+```
+childController.view.translatesAutoresizingMaskIntoConstraints = false
+containerView.addSubview(childController.view)
+```
+
+Then we set the constraint on the view, making sure all of its edges align with the container
+```
+childController.view.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+childController.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+childController.view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+childController.view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+```
+And finally we call did move to parent on the new child view controller
+```
+childController.didMove(toParentViewController: self)
+```
+
+Now we create another method to remove a child controller.
+
+```
+func removeChildController(_ childController: UIViewController) {
+}
+```
+
+First thing, we need to call the childControllers will move to parent and pass nil as an argument
+
+```
+childController.willMove(toParentViewController: nil)
+```
+
+Then we remove its view from superview
+
+```
+childController.view.removeFromSuperview()
+```
+
+And finally we remove it from its parent view controller
+
+```
+childController.removeFromParentViewController()
+```
+
+Now that we have our helper methods, all that’s left is call them when we need to add or remove a view controller.
+
+We add a call to embed child controller whenever we need to switch a header view for the card, 
+```
+embedChildController(headerViewController, in: headerContainerView)
+```
+When we want to display a loading controller while extra data is being fetched
+```
+embedChildController(loadingViewController, in: detailsContainerView)
+```
+And when the extra data is loaded, we want to show it
+```
+embedChildController(detailsViewController, in: detailsContainerView)
+```
+We also have to remember to remove the old child controller when we add a new one:
+
+So we call remove child controller for the header
+```
+removeChildController(headerViewController)
+```
+
+And we add a call to remove for the details controller
+```
+removeChildController(detailsViewController)
+```
+We can now run the app, and it works as expected, showing the information for the airport we choose.
+
+### Conclusion
+In this screencast we learned how to use child view controllers both using interface builder and using code.
+
+The result is we have a working app, with interesting behaviour, including async loads with loading state and all of that without having a View Controller or class with over 150 lines! I’ll leave it to you to play around with the project, and try and see what happens if you try to handle everything on the screen with 1 view controller.
+
+We did all of this without using any external dependencies or architectures, just good old MVC, and by using multiple view controllers per screen giving us MMVC.
+
+I hope you enjoyed the screen cast, and will use this techniques to assist in your future projects.
+
+That was me :)

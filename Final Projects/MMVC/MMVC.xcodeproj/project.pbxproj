@@ -25,7 +25,7 @@
 
 /* Begin PBXFileReference section */
 		952008431FDEECC0003D8FDC /* MainMapViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewControllerDelegate.swift; sourceTree = "<group>"; };
-		D2A5F2001F4A9144005CD714 /* MMVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2A5F2001F4A9144005CD714 /* MMVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A5F2081F4A9144005CD714 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2A5F20A1F4A9144005CD714 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2A5F20F1F4A9144005CD714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		D2A5F1F71F4A9143005CD714 = {
 			isa = PBXGroup;
 			children = (
-				D2A5F2021F4A9144005CD714 /* MMVMTutorial */,
+				D2A5F2021F4A9144005CD714 /* MMVCTutorial */,
 				D2A5F2011F4A9144005CD714 /* Products */,
 			);
 			indentWidth = 2;
@@ -66,12 +66,12 @@
 		D2A5F2011F4A9144005CD714 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2A5F2001F4A9144005CD714 /* MMVM.app */,
+				D2A5F2001F4A9144005CD714 /* MMVC.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2A5F2021F4A9144005CD714 /* MMVMTutorial */ = {
+		D2A5F2021F4A9144005CD714 /* MMVCTutorial */ = {
 			isa = PBXGroup;
 			children = (
 				E5C85AB31FD2B96800F02A8A /* Extensions */,
@@ -85,7 +85,7 @@
 				D2A5F20A1F4A9144005CD714 /* Assets.xcassets */,
 				D2A5F20F1F4A9144005CD714 /* Info.plist */,
 			);
-			path = MMVMTutorial;
+			path = MMVCTutorial;
 			sourceTree = "<group>";
 		};
 		E555E9931FCE262D004A4237 /* Model */ = {
@@ -136,9 +136,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D2A5F1FF1F4A9144005CD714 /* MMVM */ = {
+		D2A5F1FF1F4A9144005CD714 /* MMVC */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2A5F2121F4A9144005CD714 /* Build configuration list for PBXNativeTarget "MMVM" */;
+			buildConfigurationList = D2A5F2121F4A9144005CD714 /* Build configuration list for PBXNativeTarget "MMVC" */;
 			buildPhases = (
 				D2A5F1FC1F4A9144005CD714 /* Sources */,
 				D2A5F1FD1F4A9144005CD714 /* Frameworks */,
@@ -148,9 +148,9 @@
 			);
 			dependencies = (
 			);
-			name = MMVM;
+			name = MMVC;
 			productName = MyRWTutorial;
-			productReference = D2A5F2001F4A9144005CD714 /* MMVM.app */;
+			productReference = D2A5F2001F4A9144005CD714 /* MMVC.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -169,7 +169,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D2A5F1FB1F4A9143005CD714 /* Build configuration list for PBXProject "MMVM" */;
+			buildConfigurationList = D2A5F1FB1F4A9143005CD714 /* Build configuration list for PBXProject "MMVC" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -182,7 +182,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2A5F1FF1F4A9144005CD714 /* MMVM */,
+				D2A5F1FF1F4A9144005CD714 /* MMVC */,
 			);
 		};
 /* End PBXProject section */
@@ -345,9 +345,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = MMVMTutorial/Info.plist;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = MMVCTutorial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.MMVMTutorial;
+				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.MMVCTutorial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -360,9 +361,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = MMVMTutorial/Info.plist;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = MMVCTutorial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.MMVMTutorial;
+				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.MMVCTutorial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -372,7 +374,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D2A5F1FB1F4A9143005CD714 /* Build configuration list for PBXProject "MMVM" */ = {
+		D2A5F1FB1F4A9143005CD714 /* Build configuration list for PBXProject "MMVC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2A5F2101F4A9144005CD714 /* Debug */,
@@ -381,7 +383,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2A5F2121F4A9144005CD714 /* Build configuration list for PBXNativeTarget "MMVM" */ = {
+		D2A5F2121F4A9144005CD714 /* Build configuration list for PBXNativeTarget "MMVC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2A5F2131F4A9144005CD714 /* Debug */,
